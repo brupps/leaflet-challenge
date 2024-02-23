@@ -20,12 +20,13 @@ function earthquakeMarkers(response) {
       } else {return "red"};
   };
 
+
+  
 //function to create map
 function createMap(earthquakes) {
   // Create the tile layer that will be the background of our map.
-  let topo = L.tileLayer(
-      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}", {
-          attribution: "Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS",
+  let topo =  L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
       }
   );
   let night = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -51,6 +52,22 @@ function createMap(earthquakes) {
       zoom: 3,
       layers: [topo, earthquakes],
   });
+
+     // Create the Tectonic Plate geoJSON
+    d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then((geodata) => {
+
+    let plates = L.geoJson(geodata,{
+        style: {
+            color: 'red', 
+            opacity: .5,           
+            fill: false
+        }
+    });
+
+    // Add the plates to overlay
+    layerControl.addOverlay(plates, 'Tectonic Plates');
+
+    });
 
   // Create a layer control with basemaps and overlay maps and add it to the map.
   let layerControl = L.control.layers(baseMaps, overlayMaps, {
