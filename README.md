@@ -1,6 +1,8 @@
 # leaflet-challenge
 In this challenge, I was tasked with creating a map using data from USGS of recent, global earthquakes. I created markers from the geoJSON data that displayed where the earthquakes happened. The color of the marker is determined by the depth of the earthquake and the size of the marker is determined by the magnitude of the earthquake (larger circles = stronger magnitude). In addition, I added two different map views, one a topgraphical map and the other a "night" or dark global map to make the markers stand out. I also added a legend that corresponded with the depth of the earthquakes along with pop-ups for each marker that showed the information for that earthquake. Then I added the geoJSON layer for tectonic plates using data from [github] (https://github.com/fraxen/tectonicplates).
 
+https://brupps.github.io/leaflet-challenge/
+
 
 ## Instructions
 Create the Earthquake Visualization
